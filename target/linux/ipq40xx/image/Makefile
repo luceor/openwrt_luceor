@@ -216,4 +216,36 @@ define Device/zyxel_wre6606
 endef
 TARGET_DEVICES += zyxel_wre6606
 
+define Device/wallys_dr40x9
+	$(call Device/FitImage)
+	$(call Device/UbiFit)
+	DEVICE_VENDOR := Wallystech
+	DEVICE_MODEL := DR40X9
+	SOC := qcom-ipq40x9
+	DEVICE_DTS := qcom-ipq40x9-dr40x9-2w
+	DEVICE_DTS_CONFIG := config@ap.dk07.1-c1
+	DEVICE_TITLE := WALLYS IPQ40XX
+	BLOCKSIZE := 128k
+	PAGESIZE := 2048
+	NUMIWLAN :=2w
+	FILESYSTEMS := squashfs
+	DEVICE_PACKAGES :=ipq-wifi-wallystech_dr40x9 \
+		ath10k-firmware-qca988x \
+		e2fsprogs 
+	## First step before reversing the cpximg
+	#IMAGES += cpximg-7a04.bin
+	#IMAGE/cpximg-7a04.bin := append-ubi | append-kernel | mkmylofw_32m 0x8A3 3
+
+endef
+TARGET_DEVICES += wallys_dr40x9
+
+
+
+
+
+define firmware-wallys
+	wallys-ipq40xx-firmware-$(patsubst squashfs-,,$(1)-)$(RELEASE).bin
+endef
+
+
 $(eval $(call BuildImage))

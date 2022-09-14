@@ -143,7 +143,8 @@ case "$FIRMWARE" in
 		;;
 	compex,wpj428 |\
 	openmesh,a42 |\
-	openmesh,a62)
+	openmesh,a62 |\
+	wallystech,dr40x9)
 		ath10kcal_extract "0:ART" 4096 12064
 		;;
 	zyxel,wre6606)
@@ -165,6 +166,10 @@ case "$FIRMWARE" in
 		;;
 	avm,fritzbox-4040)
 		/usr/bin/fritz_cal_extract -i 1 -s 0x400 -e 0x208 -l 12064 -o /lib/firmware/$FIRMWARE $(find_mtd_chardev "urlader_config")
+		;;
+	compex,wpj419 |\
+	wallystech,dr40x9)
+		ath10kcal_extract "0:ART" 20480 12064
 		;;
 	meraki,mr33)
 		ath10kcal_ubi_extract "ART" 20480 12064

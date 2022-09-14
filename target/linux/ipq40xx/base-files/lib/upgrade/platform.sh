@@ -39,6 +39,10 @@ platform_do_upgrade() {
 		CI_KERNPART="linux"
 		nand_do_upgrade "$1"
 		;;
+	compex,wpj419 |\
+        wallystech,dr40x9)
+		nand_do_upgrade "$1"
+		;;
 	openmesh,a42 |\
 	openmesh,a62)
 		PART_NAME="inactive"
